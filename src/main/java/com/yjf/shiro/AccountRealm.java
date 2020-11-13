@@ -25,11 +25,13 @@ public class AccountRealm extends AuthorizingRealm {
         return token instanceof JwtToken;
     }
 
+    /*资源授权*/
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         return null;
     }
 
+    /*身份验证*/
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
