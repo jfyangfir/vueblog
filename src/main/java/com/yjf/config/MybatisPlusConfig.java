@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableTransactionManagement//开启事务支持
+@EnableTransactionManagement//开启事务支持g
 @MapperScan("com.yjf.sys.mapper")
 public class MybatisPlusConfig {
 
