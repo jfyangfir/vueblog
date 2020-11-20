@@ -14,9 +14,7 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,6 +26,7 @@ public class AccountController {
 
     @Autowired
     JwtUtils jwtUtils;
+
     //@Validated 数据校验
     @PostMapping("/login")
     public Result login(@Validated @RequestBody LoginDto loginDto, HttpServletResponse response){
@@ -51,7 +50,7 @@ public class AccountController {
     }
 
     @RequiresAuthentication
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public Result loginout(){
         SecurityUtils.getSubject().logout();
         return Result.succ(null);

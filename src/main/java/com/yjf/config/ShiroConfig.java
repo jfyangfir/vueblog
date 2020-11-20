@@ -3,6 +3,7 @@ package com.yjf.config;
 
 import com.yjf.shiro.AccountRealm;
 import com.yjf.shiro.JwtFilter;
+import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SessionsSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
@@ -30,19 +31,19 @@ public class ShiroConfig {
     JwtFilter jwtFilter;
 
     @Bean
-    public SessionManager sessionManager(RedisSessionDAO redisSessionDA0) {
+    public SessionManager sessionManager(RedisSessionDAO redisSessionDAO) {
 
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
 
         // inject redisSessionDao
-        sessionManager.setSessionDAO(redisSessionDA0);
+        sessionManager.setSessionDAO(redisSessionDAO);
         return sessionManager;
     }
 
     @Bean
     public SessionsSecurityManager securityManager(AccountRealm accountRealm,
                                                    SessionManager sessionManager,
-                                                   RedisCacheManager rediscacheManager) {
+                                                   RedisCacheManager redisCacheManager) {
 
 
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager(accountRealm);
@@ -51,7 +52,7 @@ public class ShiroConfig {
         securityManager.setSessionManager(sessionManager);
 
         //inject redisCacheManager
-        securityManager.setCacheManager(rediscacheManager);
+        securityManager.setCacheManager(redisCacheManager);
 
         return securityManager;
 
